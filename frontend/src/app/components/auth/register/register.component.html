@@ -1,0 +1,145 @@
+<div class="register-container">
+  <div class="register-card">
+    <div class="register-header">
+      <mat-icon class="register-icon">person_add</mat-icon>
+      <h1>Inscription</h1>
+      <p>Créez votre compte CoursParticuliers</p>
+    </div>
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form">
+      <div class="form-row">
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Prénom</mat-label>
+          <input matInput formControlName="firstName" placeholder="Votre prénom" required>
+          <mat-icon matSuffix>person</mat-icon>
+          <mat-error *ngIf="registerForm.get('firstName')?.hasError('required')">
+            Le prénom est requis
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Nom</mat-label>
+          <input matInput formControlName="lastName" placeholder="Votre nom" required>
+          <mat-icon matSuffix>person</mat-icon>
+          <mat-error *ngIf="registerForm.get('lastName')?.hasError('required')">
+            Le nom est requis
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" formControlName="email" placeholder="votre@email.com" required>
+        <mat-icon matSuffix>email</mat-icon>
+        <mat-error *ngIf="registerForm.get('email')?.hasError('required')">
+          L'email est requis
+        </mat-error>
+        <mat-error *ngIf="registerForm.get('email')?.hasError('email')">
+          Veuillez entrer un email valide
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Téléphone</mat-label>
+        <input matInput formControlName="phone" placeholder="Votre numéro de téléphone" required>
+        <mat-icon matSuffix>phone</mat-icon>
+        <mat-error *ngIf="registerForm.get('phone')?.hasError('required')">
+          Le téléphone est requis
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Adresse</mat-label>
+        <textarea matInput formControlName="address" placeholder="Votre adresse complète" rows="2" required></textarea>
+        <mat-icon matSuffix>location_on</mat-icon>
+        <mat-error *ngIf="registerForm.get('address')?.hasError('required')">
+          L'adresse est requise
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Mot de passe</mat-label>
+        <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" placeholder="Votre mot de passe" required>
+        <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" type="button">
+          <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
+        <mat-error *ngIf="registerForm.get('password')?.hasError('required')">
+          Le mot de passe est requis
+        </mat-error>
+        <mat-error *ngIf="registerForm.get('password')?.hasError('minlength')">
+          Le mot de passe doit contenir au moins 6 caractères
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Confirmer le mot de passe</mat-label>
+        <input matInput [type]="hideConfirmPassword ? 'password' : 'text'" formControlName="confirmPassword" placeholder="Confirmez votre mot de passe" required>
+        <button mat-icon-button matSuffix (click)="hideConfirmPassword = !hideConfirmPassword" type="button">
+          <mat-icon>{{ hideConfirmPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
+        <mat-error *ngIf="registerForm.get('confirmPassword')?.hasError('required')">
+          La confirmation du mot de passe est requise
+        </mat-error>
+        <mat-error *ngIf="registerForm.hasError('passwordMismatch')">
+          Les mots de passe ne correspondent pas
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Rôle</mat-label>
+        <mat-select formControlName="role" required>
+          <mat-option value="STUDENT">Élève</mat-option>
+          <mat-option value="TEACHER">Professeur</mat-option>
+        </mat-select>
+        <mat-icon matSuffix>school</mat-icon>
+        <mat-error *ngIf="registerForm.get('role')?.hasError('required')">
+          Le rôle est requis
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Champs conditionnels pour les professeurs -->
+      <div *ngIf="registerForm.get('role')?.value === 'TEACHER'" class="teacher-fields">
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Bio</mat-label>
+          <textarea matInput formControlName="bio" placeholder="Présentez-vous et vos compétences" rows="3"></textarea>
+          <mat-icon matSuffix>description</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Tarif horaire (€)</mat-label>
+          <input matInput type="number" formControlName="hourlyRate" placeholder="25" min="0">
+          <mat-icon matSuffix>euro</mat-icon>
+          <mat-error *ngIf="registerForm.get('hourlyRate')?.hasError('min')">
+            Le tarif doit être positif
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-actions">
+        <mat-checkbox formControlName="termsAccepted" class="terms-checkbox" required>
+          J'accepte les <a href="#" class="terms-link">conditions d'utilisation</a> et la <a href="#" class="terms-link">politique de confidentialité</a>
+        </mat-checkbox>
+        <mat-error *ngIf="registerForm.get('termsAccepted')?.hasError('required') && registerForm.get('termsAccepted')?.touched" class="terms-error">
+          Vous devez accepter les conditions d'utilisation
+        </mat-error>
+      </div>
+
+      <button mat-raised-button color="primary" type="submit" class="submit-btn" [disabled]="registerForm.invalid || isLoading">
+        <mat-spinner diameter="20" *ngIf="isLoading"></mat-spinner>
+        <span *ngIf="!isLoading">Créer mon compte</span>
+      </button>
+
+      <div class="error-message" *ngIf="errorMessage">
+        <mat-icon>error</mat-icon>
+        {{ errorMessage }}
+      </div>
+    </form>
+
+    <div class="register-footer">
+      <p>Déjà un compte ?</p>
+      <button mat-button color="primary" routerLink="/login">
+        Se connecter
+      </button>
+    </div>
+  </div>
+</div>

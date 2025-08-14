@@ -1,0 +1,133 @@
+<div class="home-container">
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-content">
+      <div class="hero-text">
+        <h1 class="hero-title">
+          Trouvez le professeur parfait pour vos cours particuliers
+        </h1>
+        <p class="hero-subtitle">
+          Des milliers de professeurs qualifiés dans tous les domaines : mathématiques, langues, musique, sport, et bien plus encore.
+        </p>
+        <div class="hero-actions">
+          <button mat-raised-button color="primary" size="large" routerLink="/courses" class="cta-button">
+            <mat-icon>search</mat-icon>
+            Trouver un cours
+          </button>
+          <button mat-stroked-button color="primary" size="large" routerLink="/register" class="secondary-button">
+            <mat-icon>person_add</mat-icon>
+            Devenir professeur
+          </button>
+        </div>
+      </div>
+      <div class="hero-image">
+        <mat-icon class="hero-icon">school</mat-icon>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features-section">
+    <div class="container">
+      <h2 class="section-title">Pourquoi choisir CoursParticuliers ?</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <mat-icon>verified_user</mat-icon>
+          </div>
+          <h3>Professeurs vérifiés</h3>
+          <p>Tous nos professeurs sont vérifiés et qualifiés dans leur domaine d'expertise.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <mat-icon>schedule</mat-icon>
+          </div>
+          <h3>Flexibilité totale</h3>
+          <p>Choisissez vos horaires et votre lieu de cours selon vos disponibilités.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <mat-icon>star</mat-icon>
+          </div>
+          <h3>Avis authentiques</h3>
+          <p>Consultez les avis et notes des autres élèves pour faire le bon choix.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <mat-icon>security</mat-icon>
+          </div>
+          <h3>Paiement sécurisé</h3>
+          <p>Paiement sécurisé et transparent, sans frais cachés.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Popular Subjects Section -->
+  <section class="subjects-section">
+    <div class="container">
+      <h2 class="section-title">Matières populaires</h2>
+      <div class="subjects-grid">
+        <div class="subject-card" *ngFor="let subject of popularSubjects">
+          <div class="subject-icon">
+            <mat-icon>{{ subject.icon }}</mat-icon>
+          </div>
+          <h3>{{ subject.name }}</h3>
+          <p>{{ subject.description }}</p>
+          <button mat-button color="primary" routerLink="/courses" [queryParams]="{subject: subject.name}">
+            Voir les cours
+            <mat-icon>arrow_forward</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Recent Courses Section -->
+  <section class="courses-section">
+    <div class="container">
+      <h2 class="section-title">Cours récents</h2>
+      <div class="courses-grid">
+        <mat-card class="course-card" *ngFor="let course of recentCourses">
+          <mat-card-header>
+            <mat-card-title>{{ course.title }}</mat-card-title>
+            <mat-card-subtitle>{{ course.subject }} - {{ course.level }}</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <p>{{ course.description }}</p>
+            <div class="course-meta">
+              <span class="price">{{ course.pricePerHour }}€/h</span>
+              <span class="teacher">{{ course.teacher }}</span>
+            </div>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-button color="primary" [routerLink]="['/courses', course.id]">
+              Voir détails
+            </button>
+            <button mat-raised-button color="accent" *ngIf="isLoggedIn()">
+              Réserver
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+      <div class="view-all-container">
+        <button mat-stroked-button color="primary" routerLink="/courses">
+          Voir tous les cours
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-content">
+        <h2>Prêt à commencer votre apprentissage ?</h2>
+        <p>Rejoignez des milliers d'élèves qui ont déjà trouvé leur professeur idéal.</p>
+        <button mat-raised-button color="primary" size="large" routerLink="/register">
+          Commencer maintenant
+        </button>
+      </div>
+    </div>
+  </section>
+</div>

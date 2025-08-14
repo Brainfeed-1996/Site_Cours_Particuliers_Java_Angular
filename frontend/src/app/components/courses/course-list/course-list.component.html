@@ -1,0 +1,150 @@
+<div class="course-list-container">
+  <div class="container">
+    <!-- Header Section -->
+    <div class="page-header">
+      <h1>Rechercher des cours</h1>
+      <p>Trouvez le cours parfait parmi nos milliers de professeurs qualifiés</p>
+    </div>
+
+    <!-- Search and Filters Section -->
+    <div class="search-filters-section">
+      <div class="search-bar">
+        <mat-form-field appearance="outline" class="search-field">
+          <mat-label>Rechercher un cours</mat-label>
+          <input matInput [(ngModel)]="searchTerm" placeholder="Ex: Mathématiques, Anglais, Piano..." (input)="onSearch()">
+          <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+      </div>
+
+      <div class="filters-row">
+        <mat-form-field appearance="outline" class="filter-field">
+          <mat-label>Matière</mat-label>
+          <mat-select [(ngModel)]="selectedSubject" (selectionChange)="onFilterChange()">
+            <mat-option value="">Toutes les matières</mat-option>
+            <mat-option *ngFor="let subject of subjects" [value]="subject">
+              {{ subject }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="filter-field">
+          <mat-label>Niveau</mat-label>
+          <mat-select [(ngModel)]="selectedLevel" (selectionChange)="onFilterChange()">
+            <mat-option value="">Tous les niveaux</mat-option>
+            <mat-option *ngFor="let level of levels" [value]="level">
+              {{ level }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="filter-field">
+          <mat-label>Prix maximum</mat-label>
+          <input matInput type="number" [(ngModel)]="maxPrice" placeholder="50" min="0" (input)="onFilterChange()">
+          <mat-icon matSuffix>euro</mat-icon>
+        </mat-form-field>
+
+        <button mat-stroked-button (click)="clearFilters()" class="clear-filters-btn">
+          <mat-icon>clear</mat-icon>
+          Effacer les filtres
+        </button>
+      </div>
+    </div>
+
+    <!-- Results Section -->
+    <div class="results-section">
+      <div class="results-header">
+        <h2>{{ filteredCourses.length }} cours trouvés</h2>
+        <div class="sort-controls">
+          <mat-form-field appearance="outline" class="sort-field">
+            <mat-label>Trier par</mat-label>
+            <mat-select [(ngModel)]="sortBy" (selectionChange)="onSortChange()">
+              <mat-option value="price-asc">Prix croissant</mat-option>
+              <mat-option value="price-desc">Prix décroissant</mat-option>
+              <mat-option value="rating">Note</mat-option>
+              <mat-option value="recent">Plus récents</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <!-- Loading State -->
+      <div *ngIf="isLoading" class="loading-state">
+        <mat-spinner diameter="50"></mat-spinner>
+        <p>Chargement des cours...</p>
+      </div>
+
+      <!-- No Results State -->
+      <div *ngIf="!isLoading && filteredCourses.length === 0" class="no-results">
+        <mat-icon>search_off</mat-icon>
+        <h3>Aucun cours trouvé</h3>
+        <p>Essayez de modifier vos critères de recherche ou vos filtres.</p>
+        <button mat-raised-button color="primary" (click)="clearFilters()">
+          Effacer tous les filtres
+        </button>
+      </div>
+
+      <!-- Courses Grid -->
+      <div *ngIf="!isLoading && filteredCourses.length > 0" class="courses-grid">
+        <mat-card class="course-card" *ngFor="let course of filteredCourses">
+          <mat-card-header>
+            <div mat-card-avatar class="course-avatar">
+              <mat-icon>{{ getSubjectIcon(course.subject) }}</mat-icon>
+            </div>
+            <mat-card-title>{{ course.title }}</mat-card-title>
+            <mat-card-subtitle>
+              {{ course.subject }} - {{ course.level }}
+            </mat-card-subtitle>
+          </mat-card-header>
+
+          <mat-card-content>
+            <p class="course-description">{{ course.description }}</p>
+            
+            <div class="course-details">
+              <div class="detail-item">
+                <mat-icon>person</mat-icon>
+                <span>{{ course.teacher.firstName }} {{ course.teacher.lastName }}</span>
+              </div>
+              
+              <div class="detail-item">
+                <mat-icon>location_on</mat-icon>
+                <span>{{ course.location }}</span>
+              </div>
+              
+              <div class="detail-item">
+                <mat-icon>schedule</mat-icon>
+                <span>{{ course.online ? 'En ligne' : 'En présentiel' }}</span>
+              </div>
+            </div>
+
+            <div class="course-rating" *ngIf="course.averageRating">
+              <mat-icon>star</mat-icon>
+              <span>{{ course.averageRating.toFixed(1) }}</span>
+              <span class="rating-count">({{ course.reviewCount }} avis)</span>
+            </div>
+          </mat-card-content>
+
+          <mat-card-actions>
+            <div class="price-section">
+              <span class="price">{{ course.pricePerHour }}€/h</span>
+            </div>
+            <div class="action-buttons">
+              <button mat-button color="primary" [routerLink]="['/courses', course.id]">
+                Voir détails
+              </button>
+              <button mat-raised-button color="accent" *ngIf="isLoggedIn()" (click)="bookCourse(course)">
+                Réserver
+              </button>
+            </div>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+
+      <!-- Load More Button -->
+      <div *ngIf="!isLoading && hasMoreCourses" class="load-more-section">
+        <button mat-stroked-button (click)="loadMoreCourses()">
+          Charger plus de cours
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

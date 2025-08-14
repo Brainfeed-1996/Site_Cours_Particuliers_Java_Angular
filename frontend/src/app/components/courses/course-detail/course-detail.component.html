@@ -1,0 +1,214 @@
+<div class="course-detail-container" *ngIf="course">
+  <div class="container">
+    <!-- Course Header -->
+    <div class="course-header">
+      <div class="course-info">
+        <div class="course-title-section">
+          <h1>{{ course.title }}</h1>
+          <div class="course-meta">
+            <span class="subject">{{ course.subject }}</span>
+            <span class="level">{{ course.level }}</span>
+            <span class="price">{{ course.pricePerHour }}€/h</span>
+          </div>
+        </div>
+        
+        <div class="course-rating" *ngIf="course.averageRating">
+          <div class="stars">
+            <mat-icon *ngFor="let star of getStars(course.averageRating)" class="star">star</mat-icon>
+            <mat-icon *ngFor="let star of getEmptyStars(course.averageRating)" class="star empty">star_border</mat-icon>
+          </div>
+          <span class="rating-text">{{ course.averageRating.toFixed(1) }} ({{ course.reviewCount }} avis)</span>
+        </div>
+      </div>
+
+      <div class="course-actions">
+        <button mat-raised-button color="primary" size="large" *ngIf="isLoggedIn()" (click)="bookCourse()">
+          <mat-icon>book_online</mat-icon>
+          Réserver ce cours
+        </button>
+        <button mat-stroked-button color="primary" size="large" *ngIf="!isLoggedIn()" routerLink="/login">
+          <mat-icon>login</mat-icon>
+          Se connecter pour réserver
+        </button>
+        <button mat-icon-button (click)="shareCourse()" class="share-btn">
+          <mat-icon>share</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <!-- Course Content -->
+    <div class="course-content">
+      <div class="main-content">
+        <!-- Course Description -->
+        <mat-card class="content-card">
+          <mat-card-header>
+            <mat-card-title>Description du cours</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <p>{{ course.description }}</p>
+          </mat-card-content>
+        </mat-card>
+
+        <!-- Course Details -->
+        <mat-card class="content-card">
+          <mat-card-header>
+            <mat-card-title>Détails du cours</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="details-grid">
+              <div class="detail-item">
+                <mat-icon>location_on</mat-icon>
+                <div class="detail-content">
+                  <h4>Lieu</h4>
+                  <p>{{ course.location }}</p>
+                </div>
+              </div>
+              
+              <div class="detail-item">
+                <mat-icon>schedule</mat-icon>
+                <div class="detail-content">
+                  <h4>Type de cours</h4>
+                  <p>{{ course.online ? 'En ligne' : 'En présentiel' }}</p>
+                </div>
+              </div>
+              
+              <div class="detail-item" *ngIf="course.requirements">
+                <mat-icon>assignment</mat-icon>
+                <div class="detail-content">
+                  <h4>Prérequis</h4>
+                  <p>{{ course.requirements }}</p>
+                </div>
+              </div>
+              
+              <div class="detail-item" *ngIf="course.materials">
+                <mat-icon>school</mat-icon>
+                <div class="detail-content">
+                  <h4>Matériel nécessaire</h4>
+                  <p>{{ course.materials }}</p>
+                </div>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+
+        <!-- Reviews Section -->
+        <mat-card class="content-card" *ngIf="reviews.length > 0">
+          <mat-card-header>
+            <mat-card-title>Avis des élèves</mat-card-title>
+            <mat-card-subtitle>{{ reviews.length }} avis</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="reviews-list">
+              <div class="review-item" *ngFor="let review of reviews">
+                <div class="review-header">
+                  <div class="reviewer-info">
+                    <div class="reviewer-avatar">
+                      <mat-icon>person</mat-icon>
+                    </div>
+                    <div class="reviewer-details">
+                      <h4>{{ review.student.firstName }} {{ review.student.lastName }}</h4>
+                      <div class="review-rating">
+                        <mat-icon *ngFor="let star of getStars(review.rating)" class="star small">star</mat-icon>
+                        <mat-icon *ngFor="let star of getEmptyStars(review.rating)" class="star small empty">star_border</mat-icon>
+                      </div>
+                    </div>
+                  </div>
+                  <span class="review-date">{{ review.createdAt | date:'dd/MM/yyyy' }}</span>
+                </div>
+                <p class="review-comment">{{ review.comment }}</p>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <!-- Teacher Profile -->
+        <mat-card class="sidebar-card">
+          <mat-card-header>
+            <div mat-card-avatar class="teacher-avatar">
+              <mat-icon>person</mat-icon>
+            </div>
+            <mat-card-title>{{ course.teacher.firstName }} {{ course.teacher.lastName }}</mat-card-title>
+            <mat-card-subtitle>Professeur</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <p *ngIf="course.teacher.bio">{{ course.teacher.bio }}</p>
+            <div class="teacher-stats">
+              <div class="stat-item">
+                <mat-icon>star</mat-icon>
+                <span>{{ course.teacher.averageRating || 0 }} / 5</span>
+              </div>
+              <div class="stat-item">
+                <mat-icon>people</mat-icon>
+                <span>{{ course.teacher.studentCount || 0 }} élèves</span>
+              </div>
+              <div class="stat-item">
+                <mat-icon>schedule</mat-icon>
+                <span>{{ course.teacher.courseCount || 0 }} cours</span>
+              </div>
+            </div>
+            <button mat-stroked-button color="primary" [routerLink]="['/teachers', course.teacher.id]" class="view-profile-btn">
+              Voir le profil complet
+            </button>
+          </mat-card-content>
+        </mat-card>
+
+        <!-- Booking Card -->
+        <mat-card class="sidebar-card booking-card">
+          <mat-card-header>
+            <mat-card-title>Réserver ce cours</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="booking-info">
+              <div class="price-info">
+                <span class="price">{{ course.pricePerHour }}€</span>
+                <span class="price-unit">par heure</span>
+              </div>
+              
+              <div class="availability-info">
+                <mat-icon>check_circle</mat-icon>
+                <span>Disponible immédiatement</span>
+              </div>
+            </div>
+            
+            <button mat-raised-button color="primary" size="large" *ngIf="isLoggedIn()" (click)="bookCourse()" class="book-btn">
+              <mat-icon>book_online</mat-icon>
+              Réserver maintenant
+            </button>
+            <button mat-stroked-button color="primary" size="large" *ngIf="!isLoggedIn()" routerLink="/login" class="book-btn">
+              <mat-icon>login</mat-icon>
+              Se connecter pour réserver
+            </button>
+          </mat-card-content>
+        </mat-card>
+
+        <!-- Contact Info -->
+        <mat-card class="sidebar-card">
+          <mat-card-header>
+            <mat-card-title>Informations de contact</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="contact-info">
+              <div class="contact-item">
+                <mat-icon>email</mat-icon>
+                <span>{{ course.teacher.email }}</span>
+              </div>
+              <div class="contact-item">
+                <mat-icon>phone</mat-icon>
+                <span>{{ course.teacher.phone }}</span>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Loading State -->
+<div class="loading-container" *ngIf="!course">
+  <mat-spinner diameter="50"></mat-spinner>
+  <p>Chargement du cours...</p>
+</div>
