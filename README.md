@@ -1,39 +1,39 @@
-﻿# CoursParticuliers - Plateforme E-commerce de Cours Particuliers
+# CoursParticuliers - Plateforme E-commerce de Cours Particuliers
 
-Une plateforme complÃ¨te de cours particuliers dÃ©veloppÃ©e avec **Java Spring Boot** (backend) et **Angular 17** (frontend), permettant aux professeurs de proposer leurs services et aux Ã©lÃ¨ves de rÃ©server des cours dans tous les domaines.
+Une plateforme complète de cours particuliers développée avec **Java Spring Boot** (backend) et **Angular 17** (frontend), permettant aux professeurs de proposer leurs services et aux élèves de réserver des cours dans tous les domaines.
 
-## ðŸš€ FonctionnalitÃ©s
+## 🚀 Fonctionnalités
 
-### ðŸ‘¥ Gestion des utilisateurs
+### 👥 Gestion des utilisateurs
 - **Inscription/Connexion** avec authentification JWT
-- **RÃ´les utilisateurs** : Ã‰lÃ¨ve, Professeur, Administrateur
-- **Profils personnalisÃ©s** avec bio, tarifs, et informations de contact
-- **Gestion des sessions** sÃ©curisÃ©e
+- **Rôles utilisateurs** : Élève, Professeur, Administrateur
+- **Profils personnalisés** avec bio, tarifs, et informations de contact
+- **Gestion des sessions** sécurisée
 
-### ðŸ“š Gestion des cours
-- **CrÃ©ation de cours** par les professeurs
-- **Recherche avancÃ©e** avec filtres (matiÃ¨re, niveau, prix, localisation)
-- **DÃ©tails complets** : description, prÃ©requis, matÃ©riel nÃ©cessaire
-- **Cours en ligne et en prÃ©sentiel**
-- **SystÃ¨me de notation et avis**
+### 📚 Gestion des cours
+- **Création de cours** par les professeurs
+- **Recherche avancée** avec filtres (matière, niveau, prix, localisation)
+- **Détails complets** : description, prérequis, matériel nécessaire
+- **Cours en ligne et en présentiel**
+- **Système de notation et avis**
 
-### ðŸŽ¯ RÃ©servations et paiements
-- **SystÃ¨me de rÃ©servation** de cours
-- **Gestion des crÃ©neaux** horaires
-- **Suivi des rÃ©servations** (en attente, confirmÃ©e, annulÃ©e, terminÃ©e)
+### 🎯 Réservations et paiements
+- **Système de réservation** de cours
+- **Gestion des créneaux** horaires
+- **Suivi des réservations** (en attente, confirmée, annulée, terminée)
 - **Calcul automatique** des prix
 
-### ðŸ’¬ SystÃ¨me d'avis
-- **Notation des professeurs** (1-5 Ã©toiles)
-- **Commentaires dÃ©taillÃ©s** des Ã©lÃ¨ves
+### 💬 Système d'avis
+- **Notation des professors** (1-5 étoiles)
+- **Commentaires détaillés** des élèves
 - **Moyennes et statistiques** par professeur
 
-## ðŸ› ï¸ Architecture Technique
+## 🛠️ Architecture Technique
 
 ### Backend (Java Spring Boot)
 - **Framework** : Spring Boot 3.x
-- **Base de donnÃ©es** : H2 (dÃ©veloppement) / PostgreSQL (production)
-- **SÃ©curitÃ©** : Spring Security + JWT
+- **Base de données** : H2 (développement) / PostgreSQL (production)
+- **Sécurité** : Spring Security + JWT
 - **ORM** : Spring Data JPA
 - **Validation** : Bean Validation
 - **Build** : Maven
@@ -45,17 +45,17 @@ Une plateforme complÃ¨te de cours particuliers dÃ©veloppÃ©e avec **Java Sp
 - **HTTP Client** : Intercepteurs pour JWT
 - **Build** : Angular CLI
 
-### Base de donnÃ©es
-- **EntitÃ©s** : User, Course, Booking, Review
+### Base de données
+- **Entités** : User, Course, Booking, Review
 - **Relations** : Many-to-One, One-to-Many
-- **Indexation** : OptimisÃ©e pour les recherches
+- **Indexation** : Optimisée pour les recherches
 
-## ðŸ“¦ Installation
+## 📦 Installation
 
-### PrÃ©requis
-- **Java 17** ou supÃ©rieur
-- **Node.js 18** ou supÃ©rieur
-- **Maven 3.6** ou supÃ©rieur
+### Prérequis
+- **Java 17** ou supérieur
+- **Node.js 18** ou supérieur
+- **Maven 3.6** ou supérieur
 - **Git**
 
 ### Installation rapide
@@ -66,7 +66,7 @@ Une plateforme complÃ¨te de cours particuliers dÃ©veloppÃ©e avec **Java Sp
 git clone <repository-url>
 cd Site-Java
 
-# DÃ©marrer l'application
+# Démarrer l'application
 start.bat
 ```
 
@@ -76,10 +76,10 @@ start.bat
 git clone <repository-url>
 cd Site-Java
 
-# Rendre le script exÃ©cutable
+# Rendre le script exécutable
 chmod +x start.sh
 
-# DÃ©marrer l'application
+# Démarrer l'application
 ./start.sh
 ```
 
@@ -92,7 +92,7 @@ cd backend
 # Compiler le projet
 mvn clean compile
 
-# DÃ©marrer l'application
+# Démarrer l'application
 mvn spring-boot:run
 ```
 
@@ -100,14 +100,14 @@ mvn spring-boot:run
 ```bash
 cd frontend
 
-# Installer les dÃ©pendances
+# Installer les dépendances
 npm install
 
-# DÃ©marrer l'application
+# Démarrer l'application
 npm start
 ```
 
-## ðŸŒ AccÃ¨s Ã  l'application
+## 🌐 Accès à l'application
 
 - **Frontend** : http://localhost:4200
 - **Backend API** : http://localhost:8080
@@ -116,63 +116,63 @@ npm start
   - Username: `sa`
   - Password: (laisser vide)
 
-## ðŸ‘¤ Utilisateurs de test
+## 👤 Utilisateurs de test
 
 ### Professeur
 - **Email** : `teacher@example.com`
 - **Mot de passe** : `password`
-- **RÃ´le** : TEACHER
+- **Rôle** : TEACHER
 
-### Ã‰lÃ¨ve
+### Élève
 - **Email** : `student@example.com`
 - **Mot de passe** : `password`
-- **RÃ´le** : STUDENT
+- **Rôle** : STUDENT
 
-## ðŸ“‹ FonctionnalitÃ©s dÃ©taillÃ©es
+## 📋 Fonctionnalités détaillées
 
 ### Page d'accueil
-- **Section hÃ©ro** avec call-to-action
-- **FonctionnalitÃ©s** principales
-- **MatiÃ¨res populaires** avec navigation
-- **Cours rÃ©cents** avec aperÃ§u
+- **Section héro** avec call-to-action
+- **Fonctionnalités** principales
+- **Matières populaires** avec navigation
+- **Cours récents** avec aperçu
 
 ### Recherche de cours
 - **Barre de recherche** textuelle
-- **Filtres avancÃ©s** :
-  - MatiÃ¨re
-  - Niveau (DÃ©butant, IntermÃ©diaire, AvancÃ©)
+- **Filtres avancés** :
+  - Matière
+  - Niveau (Débutant, Intermédiaire, Avancé)
   - Prix maximum
   - Localisation
 - **Tri** par prix, note, date
 - **Pagination** avec "Charger plus"
 
-### DÃ©tail d'un cours
-- **Informations complÃ¨tes** du cours
+### Détail d'un cours
+- **Informations complètes** du cours
 - **Profil du professeur** avec statistiques
-- **Avis et notes** des Ã©lÃ¨ves
-- **Bouton de rÃ©servation** directe
+- **Avis et notes** des élèves
+- **Bouton de réservation** directe
 - **Informations de contact**
 
 ### Authentification
 - **Formulaire de connexion** avec validation
-- **Inscription** avec sÃ©lection du rÃ´le
+- **Inscription** avec sélection du rôle
 - **Champs conditionnels** pour les professeurs
-- **Validation en temps rÃ©el**
+- **Validation en temps réel**
 - **Gestion des erreurs**
 
 ### Interface responsive
 - **Design adaptatif** pour mobile, tablette, desktop
 - **Navigation intuitive** avec header fixe
 - **Animations fluides** et transitions
-- **ThÃ¨me cohÃ©rent** Material Design
+- **Thème cohérent** Material Design
 
-## ðŸ”§ Configuration
+## 🔧 Configuration
 
 ### Variables d'environnement
 
 #### Backend (`application.properties`)
 ```properties
-# Base de donnÃ©es
+# Base de données
 spring.datasource.url=jdbc:h2:mem:testdb
 spring.datasource.driverClassName=org.h2.Driver
 
@@ -187,13 +187,13 @@ cors.allowed-origins=http://localhost:4200
 #### Frontend
 Les configurations sont dans `angular.json` et `package.json`.
 
-## ðŸš€ DÃ©ploiement
+## 🚀 Déploiement
 
 ### Production
 1. **Backend** : Build avec `mvn clean package`
 2. **Frontend** : Build avec `ng build --prod`
-3. **Base de donnÃ©es** : Configurer PostgreSQL
-4. **Serveur** : DÃ©ployer sur serveur web (Tomcat, etc.)
+3. **Base de données** : Configurer PostgreSQL
+4. **Serveur** : Déployer sur serveur web (Tomcat, etc.)
 
 ### Docker (optionnel)
 ```dockerfile
@@ -207,73 +207,82 @@ FROM nginx:alpine
 COPY frontend/dist/* /usr/share/nginx/html/
 ```
 
-## ðŸ“Š Structure du projet
+## 📊 Structure du projet
 
 ```
 Site-Java/
-â”œâ”€â”€ backend/                          # Application Spring Boot
-â”‚   â”œâ”€â”€ src/main/java/com/cours/
-â”‚   â”‚   â”œâ”€â”€ controller/               # ContrÃ´leurs REST
-â”‚   â”‚   â”œâ”€â”€ service/                  # Services mÃ©tier
-â”‚   â”‚   â”œâ”€â”€ repository/               # Repositories JPA
-â”‚   â”‚   â”œâ”€â”€ entity/                   # EntitÃ©s JPA
-â”‚   â”‚   â”œâ”€â”€ dto/                      # Objets de transfert
-â”‚   â”‚   â”œâ”€â”€ config/                   # Configuration
-â”‚   â”‚   â””â”€â”€ CoursParticuliersApplication.java
-â”‚   â”œâ”€â”€ src/main/resources/
-â”‚   â”‚   â””â”€â”€ application.properties
-â”‚   â””â”€â”€ pom.xml
-â”œâ”€â”€ frontend/                         # Application Angular
-â”‚   â”œâ”€â”€ src/app/
-â”‚   â”‚   â”œâ”€â”€ components/               # Composants Angular
-â”‚   â”‚   â”œâ”€â”€ services/                 # Services Angular
-â”‚   â”‚   â”œâ”€â”€ guards/                   # Guards de route
-â”‚   â”‚   â”œâ”€â”€ interceptors/             # Intercepteurs HTTP
-â”‚   â”‚   â””â”€â”€ app.component.ts
-â”‚   â”œâ”€â”€ src/styles.scss
-â”‚   â”œâ”€â”€ angular.json
-â”‚   â””â”€â”€ package.json
-â”œâ”€â”€ start.bat                         # Script de dÃ©marrage Windows
-â”œâ”€â”€ start.sh                          # Script de dÃ©marrage Linux/Mac
-â””â”€â”€ README.md
+├── backend/                          # Application Spring Boot
+│   ├── src/main/java/com/cours/
+│   │   ├── controller/               # Contrôleurs REST
+│   │   ├── service/                  # Services métier
+│   │   ├── repository/               # Repositories JPA
+│   │   ├── entity/                   # Entités JPA
+│   │   ├── dto/                      # Objets de transfert
+│   │   ├── config/                   # Configuration
+│   │   └── CoursParticuliersApplication.java
+│   ├── src/main/resources/
+│   │   └── application.properties
+│   └── pom.xml
+├── frontend/                         # Application Angular
+│   ├── src/app/
+│   │   ├── components/               # Composants Angular
+│   │   ├── services/                 # Services Angular
+│   │   ├── guards/                   # Guards de route
+│   │   ├── interceptors/             # Intercepteurs HTTP
+│   │   └── app.component.ts
+│   ├── src/styles.scss
+│   ├── angular.json
+│   └── package.json
+├── start.bat                         # Script de démarrage Windows
+├── start.sh                          # Script de démarrage Linux/Mac
+└── README.md
 ```
 
-## ðŸ› DÃ©pannage
+## 🐛 Dépannage
 
-### ProblÃ¨mes courants
+### Problèmes courants
 
-#### Backend ne dÃ©marre pas
-- VÃ©rifier Java 17+ installÃ©
-- VÃ©rifier Maven installÃ©
-- VÃ©rifier le port 8080 libre
+#### Backend ne démarre pas
+- Vérifier Java 17+ installé
+- Vérifier Maven installé
+- Vérifier le port 8080 libre
 
-#### Frontend ne dÃ©marre pas
-- VÃ©rifier Node.js 18+ installÃ©
-- ExÃ©cuter `npm install` dans le dossier frontend
-- VÃ©rifier le port 4200 libre
+#### Frontend ne démarre pas
+- Vérifier Node.js 18+ installé
+- Exécuter `npm install` dans le dossier frontend
+- Vérifier le port 4200 libre
 
 #### Erreurs de compilation
 - Nettoyer et recompiler : `mvn clean compile`
-- Supprimer node_modules et rÃ©installer : `rm -rf node_modules && npm install`
+- Supprimer node_modules et réinstaller : `rm -rf node_modules && npm install`
 
-## ðŸ¤ Contribution
+## 📚 Documentation
+
+- **[ARCHITECTURE.md](docs/ARCHITECTURE.md)** - Architecture technique détaillée
+- **[FEATURES.md](docs/FEATURES.md)** - Liste complète des fonctionnalités
+- **[USAGE.md](docs/USAGE.md)** - Guide d'installation et d'utilisation
+- **[CONTRIBUTING.md](CONTRIBUTING.md)** - Guide de contribution
+
+---
+
+## 🤝 Contribution
 
 1. Fork le projet
-2. CrÃ©er une branche feature (`git checkout -b feature/AmazingFeature`)
+2. Créer une branche feature (`git checkout -b feature/AmazingFeature`)
 3. Commit les changements (`git commit -m 'Add some AmazingFeature'`)
 4. Push vers la branche (`git push origin feature/AmazingFeature`)
 5. Ouvrir une Pull Request
 
-## ðŸ“„ Licence
+## 📄 Licence
 
-Ce projet est sous licence MIT. Voir le fichier `LICENSE` pour plus de dÃ©tails.
+Ce projet est sous licence MIT. Voir le fichier `LICENSE` pour plus de détails.
 
-## ðŸ“ž Support
+## 📞 Support
 
-Pour toute question ou problÃ¨me :
+Pour toute question ou problème :
 - Ouvrir une issue sur GitHub
-- Contacter l'Ã©quipe de dÃ©veloppement
+- Contacter l'équipe de développement
 
 ---
 
-**CoursParticuliers** - Fait avec â¤ï¸ pour l'Ã©ducation 
+**CoursParticuliers** - Fait avec ❤️ pour l'éducation
